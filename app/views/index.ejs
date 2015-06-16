@@ -1,0 +1,179 @@
+<!doctype html>
+<html>
+	<head>
+		<title><%= title %></title>
+		<link rel="stylesheet" type="text/css" href="stylesheets/app.css">
+		<script type="text/javascript" src="js/jquery.js"></script>
+	</head>
+	<body>
+		<section class="topbar">
+			<div class="row2 cf">
+				<% if(userFullName) { %>
+					<h2>Hello <%=userFullName%></h2>
+					<a href="/signout"><i class="signout fa fa-sign-out">&nbsp;</i> Sign Out</a>
+				<% } else { %>
+					<a href="/signup"><i class="signup fa fa-pencil-square-o ">&nbsp;</i> Sign Up</a>
+					<a href="/signin"><i class="signin fa fa-sign-in">&nbsp;</i> Sign In</a>
+				<% } %>
+			</div>
+		</section>
+		<div class="row2 cf">
+			<div class="logo">
+				<img src="img/logo.jpg" alt="Logo">
+			</div>
+
+			<div class="search-controls">
+				<div class="input-group">
+					<input type="text" class="form-control" placeholder="Search for...">
+					<span class="input-group-btn">
+						<button class="btn btn-default" type="button">Go!</button>
+					</span>
+			    </div><!-- /input-group -->
+			</div>
+
+			<% include global/navigation %>
+
+		</div>
+
+		<div class="main">
+			<div class="currently-viewing">
+				<div class="row2 cf">
+					<p>Currently viewing 'Bogstandard Law Firm'</p>
+				</div>
+			</div>
+
+			<div class="row2 main-page cf">
+
+				<!-- MARKETING NAVIGATION -->
+				<% include marketing/navigation %>
+
+				<!-- CRM NAVIGATION -->
+				<% include crm/navigation %>
+
+				<!-- QUALIFY NAVIGATION -->
+				<% include qualify/navigation %>
+
+				<div class="right-content">
+
+					<!-- MARKETING PAGE -->
+					<% include marketing/content %>
+
+					<!-- CRM PAGE -->
+					<% include crm/content %>
+
+					<!-- QUALIFY PAGE -->
+					<% include qualify/content %>
+
+				</div>
+			</div>
+
+			<div class="hex">
+				&nbsp;
+			</div>
+			&nbsp;
+		</div>
+
+		<footer>
+			&nbsp;
+		</footer>
+
+		<script>
+			$('.dropdown-toggle').click(function(event) {
+				$('.btn-group').addClass('open');
+			});
+
+			$(document).ready(function() {
+			    
+			    // $(".show-social-network").click(function(e) {
+
+					// switch (e.currentTarget.id) { 
+					// 	// Twitter
+					// 	case 'idata-show-twitter': 
+					// 		$('#twitter-profile .twitter-tweets').css('display', 'block');							
+					// 		break;
+					// 	case 'idata-show-facebook': 
+					// 		$('#facebook-profile .twitter-tweets').css('display', 'block');
+					// 		break;
+					// 	case 'idata-show-linkedin': 
+					// 		$('#linkedin-profile .twitter-tweets').css('display', 'block');
+					// 		var contentHeight = $('.right-content').css('height');
+
+					// 		$('.left-menu').css('height', contentHeight);							
+					// 		break;		
+					// 	default:
+					// 		$('#twitter-profile .twitter-tweets').css('display', 'none');
+					// }
+
+			    // }).triggerHandler('click');
+
+			    // $('#marketing-button button').toggle(function() {
+			    // 	$('body').css('display', 'none');
+			    // }, function() {
+			    // 	/* Stuff to do every *even* time the element is clicked */
+			    // });
+			    
+
+				var contentHeight = $('.right-content').css('height');
+
+				$('.left-menu').css('height', contentHeight);
+
+			});
+
+	        jQuery('#marketing-button button').on('click', function(event) {        
+	             jQuery('#marketing-navigation').toggle('show');
+	             jQuery('#marketing-content').toggle('show');
+	             jQuery('#crm-navigation').css('display', 'none');
+	             jQuery('#crm-content').css('display', 'none');
+	             jQuery('#qualify-navigation').css('display', 'none');
+	             jQuery('#qualify-content').css('display', 'none');
+	             setTimeout(resizeNav, 400);
+	        });
+	        jQuery('#crm-button button').on('click', function(event) {        
+	             jQuery('#crm-navigation').toggle('show');
+	             jQuery('#crm-content').toggle('show');
+	             jQuery('#qualify-navigation').css('display', 'none');
+	             jQuery('#qualify-content').css('display', 'none');
+	             jQuery('#marketing-navigation').css('display', 'none');
+	             jQuery('#marketing-content').css('display', 'none');
+	             setTimeout(resizeNav, 400);
+	        });
+	        jQuery('#qualify-button button').on('click', function(event) {        
+	             jQuery('#qualify-navigation').toggle('show');
+	             jQuery('#qualify-content').toggle('show');
+	             jQuery('#crm-navigation').css('display', 'none');
+	             jQuery('#crm-content').css('display', 'none');
+	             jQuery('#marketing-navigation').css('display', 'none');
+	             jQuery('#marketing-content').css('display', 'none');
+	             setTimeout(resizeNav, 400);
+	        });
+
+	        jQuery('#idata-show-twitter').on('click', function(event) { 
+	        	$('#twitter-profile .loading').toggle('show');	
+				setTimeout(function(){
+				  $('#twitter-profile .twitter-tweets').toggle('show');	
+				  $('#twitter-profile .loading').toggle('hide');	
+				}, 3000);	        	
+	        });
+	        jQuery('#idata-show-facebook').on('click', function(event) { 
+	        	$('#facebook-profile .twitter-tweets').toggle('show');	
+	        });	    
+	        jQuery('#idata-show-linkedin').on('click', function(event) { 
+	        	$('#linkedin-profile .twitter-tweets').toggle('show');	
+	        });	    	            
+
+	        function resizeNav() {
+				var contentHeight = $('.right-content').css('height');
+				$('.left-menu').css('height', contentHeight);
+	        };
+
+			// $(function(){
+			// 	$('.show-social-network').change(function() {
+			// 		// console.log(e);
+			// 		$(".twitter-container").toggleClass("show-hide", this.checked)
+			// 	}).change();
+			// });​
+
+			// $('.show-social-network').
+		</script>
+	</body>
+</html>
